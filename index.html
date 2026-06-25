@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    width:88%;
+    max-width:520px;
+        max-height:calc(100vh - 24px);
+        background:white;
+        padding:26px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0 10px 30px rgba(0,0,0,0.15);
+        position:relative;
+        z-index:2;
+        overflow:hidden;
+    }
+
+    #result {
+        font-size:15px;
+    }
+
+    #result img {
+        width:140px;
+        max-width:100%;
+        height:auto;
+        border-radius:15px;
+        display:block;
+        margin:0 auto 15px auto;
+    }
+
+    #result h1 {
+        font-size:1.55rem;
+        margin-bottom:0.8rem;
+    }
+
+    #result p {
+        margin-bottom:1rem;
+        line-height:1.5;
+    }
+
+    @media (max-height:720px) {
+        .container {
+            padding:18px;
+        }
+        #result {
+            font-size:14px;
+        }
+        #result h1 {
+            font-size:1.4rem;
+        }
+        #result img {
+            width:130px;
+        }
+    }
+
+    @media (max-height:640px) {
+        .container {
+            padding:14px;
+        }
+        #result {
+            font-size:12px;
+        }
+        #result h1 {
+            font-size:1.3rem;
+        }
+        #result img {
+            width:120px;
+        }
+    }
+
+h1,h2{
+    color:#ff4f7b;
+}
+
+p{
+    color:#555;
+    line-height:1.7;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:none;
+    border-radius:12px;
+    background:#ff4f7b;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+}
+
+.hidden{
+    display:none;
+}
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:white;
+    animation:float 8s linear infinite;
+    opacity:0.8;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    font-size:20px;
+    animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="welcome">
+        <h1>💖 Hey Beautiful 💖</h1>
+         <img
+        src="img/tkthao219-bubududu.webp"
+        alt="Bubu Dudu"
+        width="160"
+        style="
+            display:block;
+            margin:15px auto;
+            border-radius:15px;
+        "
+    >
+        <br>
+        <p>
+            I made a tiny little game for you.
+            Answer these questions and discover a surprise ❤️
+        </p>
+        <br>
+        <button class="btn" onclick="startQuiz()">Start 💕</button>
+    </div>
+
+    <div id="quiz" class="hidden">
+        <h2 id="question"></h2>
+        <br>
+        <button class="btn" id="option1" onclick="nextQuestion()"></button>
+        <button class="btn" id="option2" onclick="nextQuestion()"></button>
+    </div>
+
+    <div id="result" class="hidden">
+        <h1>💖 Get Well Soon My Love 💖</h1>
+        <br>
+        <img
+              src="img/bubududu-panda.webp"
+              alt="Bubu Dudu"
+              width="160"
+            >
+        <p>
+            Hey Baby Penguin🐧 ❤️
+            <br><br>
+
+            I know you're not feeling your best right now,
+            but I want you to remember that you are incredibly special to me.
+            🌸
+
+            <br><br>
+
+            Please take good care of yourself,
+            get plenty of rest,
+            drink lots of water,
+            and let yourself heal.
+
+            <br><br>
+
+            If I could, I'd be there right now giving you the biggest hug 🤗
+            and taking care of you until you feel better.
+
+            <br><br>
+
+            You always make my days brighter,
+            and I can't wait to see your beautiful smile again. ✨
+
+            <br><br>
+            
+
+            Sending unlimited hugs 🤗,
+            kisses 😘,
+            and all my love ❤️❤️❤️
+        </p>
+        <p><strong>Get well soon, my love.</strong><br>I love you more than words can say. 💕</p>
+    </div>
+
+</div>
+
+<script>
+
+const questions = [
+    {
+    question:"How are you feeling today? 🥺",
+    a:"A little sick 🤒",
+    b:"Very sick 🤧"
+},
+{
+    question:"What do you need right now? ❤️",
+    a:"A big hug 🤗",
+    b:"Lots of love 💕"
+},
+{
+    question:"Who is the cutest girl in the world? 😍",
+    a:"Me 😌",
+    b:"Definitely me 🥰"
+}
+];
+
+let current = 0;
+
+function startQuiz(){
+    document.getElementById("welcome").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    loadQuestion();
+}
+
+function loadQuestion(){
+    document.getElementById("question").innerText =
+        questions[current].question;
+
+    document.getElementById("option1").innerText =
+        questions[current].a;
+
+    document.getElementById("option2").innerText =
+        questions[current].b;
+}
+
+function nextQuestion(){
+
+    current++;
+
+    if(current < questions.length){
+        loadQuestion();
+    }
+    else{
+        document.getElementById("quiz").classList.add("hidden");
+        document.getElementById("result").classList.remove("hidden");
+        launchConfetti();
+    }
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (15 + Math.random()*20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
+}
+
+setInterval(createHeart,500);
+
+function launchConfetti(){
+
+    const emojis = ["🎉","✨","💖","💕","🌸"];
+
+    for(let i=0;i<60;i++){
+
+        const c = document.createElement("div");
+
+        c.classList.add("confetti");
+        c.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+        c.style.left = Math.random()*100 + "vw";
+
+        c.style.animationDuration =
+            (2 + Math.random()*3) + "s";
+
+        document.body.appendChild(c);
+
+        setTimeout(()=>{
+            c.remove();
+        },5000);
+    }
+}
+
+</script>
+
+</body>
+</html>
